@@ -1,0 +1,7 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var baseMerge = _require(_dependencyMap[0], '../internal/baseMerge'),
+      createAssigner = _require(_dependencyMap[1], '../internal/createAssigner');
+
+  var merge = createAssigner(baseMerge);
+  module.exports = merge;
+});

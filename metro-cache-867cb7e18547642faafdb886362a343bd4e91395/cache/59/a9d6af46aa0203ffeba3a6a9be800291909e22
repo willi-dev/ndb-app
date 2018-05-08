@@ -1,0 +1,18 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var getNative = _require(_dependencyMap[0], '../internal/getNative'),
+      isArrayLike = _require(_dependencyMap[1], '../internal/isArrayLike'),
+      isObject = _require(_dependencyMap[2], '../lang/isObject'),
+      shimKeys = _require(_dependencyMap[3], '../internal/shimKeys');
+
+  var nativeKeys = getNative(Object, 'keys');
+  var keys = !nativeKeys ? shimKeys : function (object) {
+    var Ctor = object == null ? undefined : object.constructor;
+
+    if (typeof Ctor == 'function' && Ctor.prototype === object || typeof object != 'function' && isArrayLike(object)) {
+      return shimKeys(object);
+    }
+
+    return isObject(object) ? nativeKeys(object) : [];
+  };
+  module.exports = keys;
+});

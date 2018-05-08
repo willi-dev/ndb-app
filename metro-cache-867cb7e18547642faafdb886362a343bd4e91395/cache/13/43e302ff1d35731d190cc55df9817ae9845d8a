@@ -1,0 +1,15 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var bindCallback = _require(_dependencyMap[0], './bindCallback');
+
+  function createForOwn(objectFunc) {
+    return function (object, iteratee, thisArg) {
+      if (typeof iteratee != 'function' || thisArg !== undefined) {
+        iteratee = bindCallback(iteratee, thisArg, 3);
+      }
+
+      return objectFunc(object, iteratee);
+    };
+  }
+
+  module.exports = createForOwn;
+});

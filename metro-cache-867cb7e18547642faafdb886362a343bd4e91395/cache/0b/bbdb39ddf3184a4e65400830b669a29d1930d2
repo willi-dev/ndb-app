@@ -1,0 +1,7 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var baseForOwn = _require(_dependencyMap[0], '../internal/baseForOwn'),
+      createForOwn = _require(_dependencyMap[1], '../internal/createForOwn');
+
+  var forOwn = createForOwn(baseForOwn);
+  module.exports = forOwn;
+});

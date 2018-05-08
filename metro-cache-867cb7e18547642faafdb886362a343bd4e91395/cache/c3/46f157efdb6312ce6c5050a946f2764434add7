@@ -1,0 +1,9 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var isObject = _require(_dependencyMap[0], '../lang/isObject');
+
+  function toObject(value) {
+    return isObject(value) ? value : Object(value);
+  }
+
+  module.exports = toObject;
+});

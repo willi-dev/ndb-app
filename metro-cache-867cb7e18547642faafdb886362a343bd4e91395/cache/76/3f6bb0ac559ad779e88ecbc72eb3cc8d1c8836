@@ -1,0 +1,42 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var isArguments = _require(_dependencyMap[0], '../lang/isArguments'),
+      isArray = _require(_dependencyMap[1], '../lang/isArray'),
+      isIndex = _require(_dependencyMap[2], '../internal/isIndex'),
+      isLength = _require(_dependencyMap[3], '../internal/isLength'),
+      isObject = _require(_dependencyMap[4], '../lang/isObject');
+
+  var objectProto = Object.prototype;
+  var hasOwnProperty = objectProto.hasOwnProperty;
+
+  function keysIn(object) {
+    if (object == null) {
+      return [];
+    }
+
+    if (!isObject(object)) {
+      object = Object(object);
+    }
+
+    var length = object.length;
+    length = length && isLength(length) && (isArray(object) || isArguments(object)) && length || 0;
+    var Ctor = object.constructor,
+        index = -1,
+        isProto = typeof Ctor == 'function' && Ctor.prototype === object,
+        result = Array(length),
+        skipIndexes = length > 0;
+
+    while (++index < length) {
+      result[index] = index + '';
+    }
+
+    for (var key in object) {
+      if (!(skipIndexes && isIndex(key, length)) && !(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
+        result.push(key);
+      }
+    }
+
+    return result;
+  }
+
+  module.exports = keysIn;
+});

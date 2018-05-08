@@ -1,0 +1,10 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var baseFor = _require(_dependencyMap[0], './baseFor'),
+      keysIn = _require(_dependencyMap[1], '../object/keysIn');
+
+  function baseForIn(object, iteratee) {
+    return baseFor(object, iteratee, keysIn);
+  }
+
+  module.exports = baseForIn;
+});

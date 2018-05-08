@@ -1,5 +1,6 @@
 import React from 'react';
-import { Alert, StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { Alert, StyleSheet, Text, View, TextInput } from 'react-native';
+import { Input, Button } from 'nachos-ui';
 
 export default class App extends React.Component {
   
@@ -13,36 +14,25 @@ export default class App extends React.Component {
   }
 
   render() {
+    const inputStyle = { margin: 15 };
+    const btnStyle = { margin: 15 };
     return (
-      <View style={styles.container}>
-        <TextInput 
-          style={styles.textInput}
-          placeholder="Type Here to Translate"
-          onChangeText={(text)=> this.setState({text})}
+      <View style={{padding: 20}}>
+        <Input 
+          style={inputStyle}
+          value={this.state.text}
+          onChangeText={(text) => this.setState({text})}
+          placeholder="Cari Tempat Nongkrong!"
         />
-        <Text style={styles.textPizza}>
+        <Button 
+          kind="squared" title="Cari" type="success" style={btnStyle}
+          onPress={this._onPressButton}>
+          Cari
+        </Button>}
+        <Text style={{padding: 10, fontSize: 22}}>
           {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
         </Text>
-
-        <Button
-          onPress={this._onPressButton}
-          title="Press Me"
-        />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 20
-  },
-  textInput: {
-    height: 80,
-    fontSize: 22
-  },
-  textPizza: {
-    padding: 10, 
-    fontSize: 22
-  }
-});

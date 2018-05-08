@@ -1,0 +1,16 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  var getNative = _require(_dependencyMap[0], '../internal/getNative'),
+      isLength = _require(_dependencyMap[1], '../internal/isLength'),
+      isObjectLike = _require(_dependencyMap[2], '../internal/isObjectLike');
+
+  var arrayTag = '[object Array]';
+  var objectProto = Object.prototype;
+  var objToString = objectProto.toString;
+  var nativeIsArray = getNative(Array, 'isArray');
+
+  var isArray = nativeIsArray || function (value) {
+    return isObjectLike(value) && isLength(value.length) && objToString.call(value) == arrayTag;
+  };
+
+  module.exports = isArray;
+});
